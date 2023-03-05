@@ -1,4 +1,6 @@
 import dynamic from "next/dynamic";
 
-const Home = dynamic(import("home/pages/index"));
-export default Home;
+export default dynamic(import("home/pages/index"));
+
+export const getServerSideProps = async (...ctx) =>
+  import("home/pages/index").then((mod) => mod.getServerSideProps(...ctx));
