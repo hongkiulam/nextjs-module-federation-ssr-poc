@@ -10,12 +10,31 @@ module.exports = {
         name: "shell",
         filename: "static/chunks/remoteEntry.js",
         exposes: {
-          "./_app": "./pages/_app.tsx",
+          "./_app": "./pages/_app",
+          "./_document": "./pages/_document",
         },
         remotes: {
           home: `home@http://localhost:3001/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
+        },
+        shared: {
+          // must be eager because it's loaded in _document (not sure of the underlying reason)
+          "next-document": {
+            eager: true,
+            singleton: true,
+          },
+          // react and react/ must be eager because next-document is eager
+          react: {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
+          "react/": {
+            singleton: true,
+            requiredVersion: false,
+            eager: true,
+          },
         },
       })
     );
