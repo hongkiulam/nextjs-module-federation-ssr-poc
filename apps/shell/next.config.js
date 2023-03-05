@@ -11,7 +11,6 @@ module.exports = {
         filename: "static/chunks/remoteEntry.js",
         exposes: {
           "./_app": "./pages/_app",
-          "./_document": "./pages/_document",
         },
         remotes: {
           home: `home@http://localhost:3001/_next/static/${
