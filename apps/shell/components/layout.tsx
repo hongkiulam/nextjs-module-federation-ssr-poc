@@ -1,7 +1,9 @@
 const Layout = ({ children }) => {
   return (
     <div>
-      <header>Header</header>
+      <header>
+        <i>Header from _app -&gt; layout in shell</i>
+      </header>
       {children}
     </div>
   );

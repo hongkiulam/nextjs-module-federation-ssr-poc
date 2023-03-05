@@ -7,3 +7,5 @@ export default function MyApp({ Component, pageProps }) {
     </Layout>
   );
 }
+
+MyApp.getInitialProps = () => ({});
