@@ -8,6 +8,8 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
+# TODO Update this
+
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app
 - `ui`: a stub React component library shared by both `web` and `docs` applications
@@ -16,6 +18,7 @@ This Turborepo includes the following packages/apps:
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
+# TODO Add diagrams
 ### Utilities
 
 This Turborepo has some additional tools already setup for you:

@@ -1,10 +1,14 @@
-import { Button } from "ui";
+// import { Button } from "ui";
 
-export default function Docs() {
-  return (
-    <div>
-      <h1>Docs</h1>
-      <Button />
-    </div>
-  );
-}
+import dynamic from "next/dynamic";
+
+// export default function Docs() {
+//   return (
+//     <div>
+//       <h1>Docs</h1>
+//       <Button />
+//     </div>
+//   );
+// }
+const Home = dynamic(import("home/pages/index"));
+export default Home;
