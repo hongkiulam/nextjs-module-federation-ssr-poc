@@ -17,24 +17,7 @@ module.exports = {
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
         },
-        shared: {
-          // must be eager because it's loaded in _document (not sure of the underlying reason)
-          "next-document": {
-            eager: true,
-            singleton: true,
-          },
-          // react and react/ must be eager because next-document is eager
-          react: {
-            singleton: true,
-            requiredVersion: false,
-            eager: true,
-          },
-          "react/": {
-            singleton: true,
-            requiredVersion: false,
-            eager: true,
-          },
-        },
+        shared: {},
       })
     );
 
