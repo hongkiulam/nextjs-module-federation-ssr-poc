@@ -95,6 +95,7 @@ importers:
   packages/next-document:
     specifiers:
       '@module-federation/nextjs-mf': ^6.1.3
+      '@module-federation/node': ^0.11.1
       '@types/react': ^17.0.37
       '@types/react-dom': ^17.0.11
       eslint: ^7.32.0
@@ -105,6 +106,7 @@ importers:
       typescript: ^4.5.2
     dependencies:
       '@module-federation/nextjs-mf': 6.1.3_r3of5l5sy5olx2opf5uh67vg2a
+      '@module-federation/node': 0.11.1_r3of5l5sy5olx2opf5uh67vg2a
       next: 13.2.3_biqbaboplfbrettd7655fr4n2y
     devDependencies:
       '@types/react': 17.0.52
