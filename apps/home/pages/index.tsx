@@ -1,10 +1,10 @@
-import { Button } from "ui";
+import { Button } from "@mantine/core";
 
 const Home = ({ users }) => {
   return (
     <div>
       <h1>Home</h1>
-      <Button />
+      <Button>Boop</Button>
       <ul>
         {users.map((u) => (
           <li key={u.id}>{u.name}</li>

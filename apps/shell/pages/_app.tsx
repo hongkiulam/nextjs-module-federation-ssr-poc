@@ -1,9 +1,12 @@
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
+import { MantineProvider } from "@mantine/core";
 export default function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </MantineProvider>
   );
 }
 
