@@ -1,3 +1,3 @@
-import dynamic from "next/dynamic";
+import { NextDocument } from "next-document";
 
-export default dynamic(import("next-document").then((mod) => mod.NextDocument));
+export default NextDocument;
