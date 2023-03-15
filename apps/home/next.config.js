@@ -17,7 +17,10 @@ module.exports = {
         exposes: {
           "./pages/index": "./pages/index",
         },
-        shared: {},
+        shared: {
+          "@emotion/": { singleton: true },
+        },
+        extraOptions: { automaticAsyncBoundary: true },
       })
     );
 

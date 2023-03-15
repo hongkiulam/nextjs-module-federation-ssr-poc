@@ -17,7 +17,12 @@ module.exports = {
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
         },
-        shared: {},
+        shared: {
+          "@emotion/": {
+            singleton: true,
+          },
+        },
+        extraOptions: { automaticAsyncBoundary: true },
       })
     );
 
