@@ -1,11 +1,20 @@
+import { AppShell, Code, Flex, Header, Text } from "@mantine/core";
+
 const Layout = ({ children }) => {
   return (
-    <div>
-      <header>
-        <i>Header from _app -&gt; layout in shell</i>
-      </header>
+    <AppShell
+      header={
+        <Header height={60}>
+          <Flex align={"center"} h="100%" px={"24px"}>
+            <Text>
+              Header from <Code>shell/_app</Code>
+            </Text>
+          </Flex>
+        </Header>
+      }
+    >
       {children}
-    </div>
+    </AppShell>
   );
 };
 

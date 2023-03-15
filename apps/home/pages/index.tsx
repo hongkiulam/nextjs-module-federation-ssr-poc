@@ -1,9 +1,11 @@
-import { Button } from "@mantine/core";
+import { Button, Code, Text } from "@mantine/core";
 
 const Home = ({ users }) => {
   return (
     <div>
-      <h1>Home</h1>
+      <Text>
+        Home from <Code>home/index</Code>
+      </Text>
       <Button>Boop</Button>
       <ul>
         {users.map((u) => (

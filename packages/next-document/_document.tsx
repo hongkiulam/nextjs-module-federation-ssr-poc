@@ -19,6 +19,7 @@ export class NextDocument extends Document<AdditionalProps> {
   ): Promise<DocumentInitialProps & AdditionalProps> => {
     const initialProps = await Document.getInitialProps(ctx);
     const chunks = await flushChunks();
+    console.log("Reloading Document");
     // can be any lifecycle or implementation you want
     ctx?.res?.on("finish", () => {
       revalidate().then((shouldUpdate) => {
@@ -39,9 +40,9 @@ export class NextDocument extends Document<AdditionalProps> {
           <FlushedChunks chunks={this.props.chunks} />
         </Head>
         <body>
-          <i>From _document in shared library</i>
           <Main />
           <NextScript />
+          <i>From _document in shared library</i>
         </body>
       </Html>
     );
