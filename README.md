@@ -1,3 +1,15 @@
+# TODO
+
+- error boundary which reads hydration error or query client error and auto refreshes once
+- react-query
+  - product rows
+- deploy assets and shell app
+- delegate modules
+- shared state (cart)
+- graceful error boundaries
+- telemetry
+
+try this weird if statement in document around revalidate https://github.com/K-Cheddar/module-federation-examples/blob/hot-reload-issue/nextjs-ssr/home/pages/_document.js
 # Turborepo starter
 
 This is an official starter Turborepo.
@@ -19,6 +31,7 @@ This Turborepo includes the following packages/apps:
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 # TODO Add diagrams
+
 ### Utilities
 
 This Turborepo has some additional tools already setup for you:
@@ -88,3 +101,51 @@ Learn more about the power of Turborepo:
 - [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
 - [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
 - [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+
+# Notes
+
+## `_app`/Shell sharing
+
+Any sort of global app configuration such as context, or layouts can be added to the shell app, which when loaded with the constituent parts via the remotes - becomes the full app. The shell app can also act as a remote though, and share these global parts for the other remotes to consume. This bi-directional sharing is extremely powerful as it allows each remote to be developed individually but still load in all the important global configuration's that exist in the full app.
+
+## `_document` sharing
+
+Cannot share it as a federated module, there are issues with Next.js not recognising the underlying Document HTMLContext. Sharing as a build-time library seems to resolve this issue.
+This trade-off is not a huge issue as the `_document` should not change too often after the initial setup, and also is only really needed for the shell application in production. All other remotes only require `_document` in development to mimic a full app environment, similar to what `_app` is used for.
+
+## Shared module is not available for eager consumption
+
+An async boundary is required. See https://github.com/module-federation/universe/issues/470.
+
+In this repo, we are using the `automaticAsyncBoundary`. Which means we can sync import any federated module.
+If the built-in plugin option stops working, then something like `real-pages` is needed. (other potential names: `async-pages` `pages-src`)
+
+## React-Query Context Sharing
+> `No QueryClient set, use QueryClientProvider to set one`
+
+Seems like hot-reloading sometimes causes issues (assumption). It's a very hard issue to reporoduce consistenty .
+The behaviour is similar to the hydration mismatch bug, which is resolved by a double refresh.
+
+<details>
+<summary>Results from some testing</summary>
+
+🟩 - dev server running, open in browser
+🟧 - dev server running, closed in browser
+    
+Based on a fresh tab and fresh dev server (with no changes to files between starting dev server and opening tab)
+
+|  | shell 🟩 remote 🟩 | shell 🟩 remote 🟧 | shell 🟧 remote 🟩 |
+| --- | --- | --- | --- |
+| load | shell ✅ remote ✅ | ✅ | ✅ |
+| refresh | shell ✅ remote ✅ | ✅ | ✅ |
+| Update shell, refresh 1 | shell hot reload ✅ shell refresh (query client) ❌ remote refresh (hydration) ❌ | hot reload ✅ refresh (query client) ❌ | hydration error ❌ |
+| Update shell, refresh 2 | shell ✅ remote ✅ | ✅ | ✅ |
+| Update shell, refresh 3 | shell ✅ remote ✅ | ✅ | ✅ |
+| Update remote, refresh 1 | shell refresh hydration ❌ remote hot reload ✅ remote refresh query client ❌ | hydration error ❌ | hot reload ✅ refresh (query client) ❌ |
+| Update remote, refresh 2 | shell ✅ remote ✅ | ✅ | ✅ |
+| Update remote, refresh 3 | shell ✅ remote ✅ | ✅ | ✅ |
+| Update remote and shell, refresh 1 | shell query client ❌ remote query client ❌ | hot reload ✅ query client ❌ | hot reload ✅ query client ❌ |
+| Update remote and shell, refresh 2 | shell ✅ remote ✅ | ✅ | ✅ |
+| Update remote and shell, refresh 3 | shell ✅ remote ✅ | ✅ | ✅ |
+
+</details>
