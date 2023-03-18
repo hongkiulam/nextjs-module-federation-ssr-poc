@@ -1,17 +1,14 @@
 import { Button, Code, Text } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 
-const Home = ({ users }) => {
-  const query = useQuery({
-    queryKey: ["todos"],
-    queryFn: () => {
-      return fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
-        res.json()
-      );
-    },
-  });
+const getUsers = () => {
+  return fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
+    res.json()
+  );
+};
+const Home = () => {
+  const { data: users } = useQuery({ queryKey: ["users"], queryFn: getUsers });
 
-  const users2 = query.data;
   return (
     <div>
       <Text>
@@ -19,7 +16,7 @@ const Home = ({ users }) => {
       </Text>
       <Button>Boop</Button>
       <ul>
-        {users2?.map((u) => (
+        {users?.map((u) => (
           <li key={u.id}>{u.name}</li>
         ))}
       </ul>
@@ -30,10 +27,12 @@ const Home = ({ users }) => {
 export default Home;
 
 export const getServerSideProps = async (ctx) => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
-  const users = await res.json();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(["users"], getUsers);
 
   return {
-    props: { users },
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
   };
 };

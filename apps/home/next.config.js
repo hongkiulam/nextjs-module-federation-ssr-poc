@@ -1,5 +1,6 @@
 const { NextFederationPlugin } = require("@module-federation/nextjs-mf");
 
+/** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
   transpilePackages: ["ui"],
