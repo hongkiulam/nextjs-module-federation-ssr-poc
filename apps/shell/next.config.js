@@ -21,6 +21,7 @@ module.exports = {
           "@emotion/": {
             singleton: true,
           },
+          "@tanstack/": { singleton: true },
         },
         extraOptions: { automaticAsyncBoundary: true },
       })
