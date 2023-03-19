@@ -8,22 +8,22 @@ module.exports = {
     const { isServer } = options;
     config.plugins.push(
       new NextFederationPlugin({
-        name: "home",
+        name: "product",
         filename: "static/chunks/remoteEntry.js",
         remotes: {
           shell: `shell@http://localhost:3000/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
-          product: `product@http://localhost:3002/_next/static/${
-            isServer ? "ssr" : "chunks"
-          }/remoteEntry.js`,
         },
         exposes: {
           "./pages/index": "./pages/index",
+          "./lib/components/ProductCard": "./lib/components/ProductCard",
+          "./lib/state/cart": "./lib/state/cart",
         },
         shared: {
           "@mantine/core": { singleton: true },
           "@tanstack/": { singleton: true },
+          zustand: { singleton: true },
         },
         extraOptions: { automaticAsyncBoundary: true },
       })

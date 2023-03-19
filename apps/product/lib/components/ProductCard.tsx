@@ -1,13 +1,19 @@
 import React from "react";
-import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
+import { Badge, Button, Card, Code, Group, Image, Text } from "@mantine/core";
 import { DummyProduct } from "../types/product";
+import { useCart } from "../state/cart";
 
 const ProductCard: React.FC<{ product: DummyProduct }> = ({ product }) => {
+  const { cart, addToCart, removeFromCart } = useCart();
+  const isInCart = cart.includes(product.id);
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
         <Image src={product.thumbnail} height={160} alt={product.title} />
       </Card.Section>
+      <Text my={"sm"}>
+        ProductCard from <Code>product/lib/components/ProductCard</Code>
+      </Text>
 
       <Group position="apart" mt="md" mb="xs">
         <Text weight={500}>{product.title}</Text>
@@ -20,8 +26,17 @@ const ProductCard: React.FC<{ product: DummyProduct }> = ({ product }) => {
         {product.description}
       </Text>
 
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-        Add to cart
+      <Button
+        variant="light"
+        color={isInCart ? "red" : "blue"}
+        fullWidth
+        mt="md"
+        radius="md"
+        onClick={() => {
+          isInCart ? removeFromCart(product.id) : addToCart(product.id);
+        }}
+      >
+        {isInCart ? "Remove" : "Add"} to cart
       </Button>
     </Card>
   );

@@ -1,6 +1,6 @@
 import { Code, SimpleGrid, Text } from "@mantine/core";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
-import ProductCard from "../lib/components/ProductCard";
+import ProductCard from "product/lib/components/ProductCard";
 import { DummyProduct } from "../lib/types/product";
 
 const getProducts = (): Promise<DummyProduct[]> =>

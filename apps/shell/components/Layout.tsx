@@ -1,5 +1,4 @@
 import {
-  ActionIcon,
   Anchor,
   AppShell,
   Code,
@@ -9,9 +8,10 @@ import {
   UnstyledButton,
   useMantineColorScheme,
 } from "@mantine/core";
-
+import { useCart } from "product/lib/state/cart";
 const Layout = ({ children }) => {
   const { toggleColorScheme } = useMantineColorScheme();
+  const { cart } = useCart();
   return (
     <AppShell
       header={
@@ -24,7 +24,9 @@ const Layout = ({ children }) => {
               Toggle Colour Scheme
             </UnstyledButton>
             <Anchor href="/search">Browse</Anchor>
-            <Anchor href="/cart">Cart</Anchor>
+            <Anchor href="/cart">
+              Cart {cart.length ? <>({cart.length})</> : null}
+            </Anchor>
           </Flex>
         </Header>
       }

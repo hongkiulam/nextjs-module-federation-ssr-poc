@@ -17,6 +17,9 @@ module.exports = {
           home: `home@http://localhost:3001/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
+          product: `product@http://localhost:3002/_next/static/${
+            isServer ? "ssr" : "chunks"
+          }/remoteEntry.js`,
         },
         shared: {
           "@mantine/core": { singleton: true },

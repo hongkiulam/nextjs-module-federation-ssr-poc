@@ -2,9 +2,10 @@
 
 - react-query
   - product rows
+- colour code remotes (background or outline)
+- share types ( dummyproduct)
 - deploy assets and shell app
 - delegate modules
-- shared state (cart)
 - graceful error boundaries
 - telemetry
 
