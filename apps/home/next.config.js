@@ -19,7 +19,7 @@ module.exports = {
           "./pages/index": "./pages/index",
         },
         shared: {
-          "@emotion/": { singleton: true },
+          "@mantine/core": { singleton: true },
           "@tanstack/": { singleton: true },
         },
         extraOptions: { automaticAsyncBoundary: true },

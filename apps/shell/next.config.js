@@ -19,9 +19,7 @@ module.exports = {
           }/remoteEntry.js`,
         },
         shared: {
-          "@emotion/": {
-            singleton: true,
-          },
+          "@mantine/core": { singleton: true },
           "@tanstack/": { singleton: true },
         },
         extraOptions: { automaticAsyncBoundary: true },

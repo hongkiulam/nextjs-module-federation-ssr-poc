@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { MantineProvider } from "@mantine/core";
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from "@mantine/core";
 import {
   Hydrate,
   QueryClient,
@@ -9,14 +13,27 @@ import Layout from "../components/Layout";
 
 export default function MyApp({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient());
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps?.dehydratedState || {}}>
-        <MantineProvider withGlobalStyles withNormalizeCSS>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </MantineProvider>
+        <ColorSchemeProvider
+          colorScheme={colorScheme}
+          toggleColorScheme={toggleColorScheme}
+        >
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{ colorScheme }}
+          >
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </MantineProvider>
+        </ColorSchemeProvider>
       </Hydrate>
     </QueryClientProvider>
   );

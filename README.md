@@ -1,6 +1,5 @@
 # TODO
 
-- error boundary which reads hydration error or query client error and auto refreshes once
 - react-query
   - product rows
 - deploy assets and shell app
@@ -149,3 +148,19 @@ Based on a fresh tab and fresh dev server (with no changes to files between star
 | Update remote and shell, refresh 3 | shell ✅ remote ✅ | ✅ | ✅ |
 
 </details>
+
+Changes to the _document while the dev server is open will also trigger this error `No QueryClient set, use QueryClientProvider to set one` - restarting the server will solve the issue
+
+## Issues with Console Ninja Extension
+
+Using Console Ninja just seems to blow up the dev server 🤷
+
+## SSR with Mantine Component Library
+
+In this repo I am using Mantine for the UI library, just to speed up development. It is built on top of Emotion, so I presumed the SSR would work out of the box. But no, all the server content from Mantine is unstyled, causing a flash on the initial load due to the CSS coming in on the client.
+
+I've tested Emotion to work perfectly fine with zero configuration using @emotion/styled, so it's probably an issue with Mantine.
+
+## Shared library with share key `scope/`
+
+Very useful to share all packages under the scope, e.g. `'@tanstack/'` shares `'@tanstack/query-core'` and `'@tanstack/react-query'`. Just have to be careful as sometimes you don't want to share a nested package.
