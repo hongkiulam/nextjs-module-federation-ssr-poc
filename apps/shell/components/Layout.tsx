@@ -1,9 +1,10 @@
 import {
   Anchor,
   AppShell,
-  Code,
+  Badge,
   Flex,
   Header,
+  Indicator,
   Text,
   UnstyledButton,
   useMantineColorScheme,
@@ -18,14 +19,22 @@ const Layout = ({ children }) => {
         <Header height={60}>
           <Flex align={"center"} h="100%" px={"24px"} justify="space-between">
             <Text>
-              Header from <Code>shell/_app</Code>
+              Header from <Badge color="dark">shell/_app</Badge>
             </Text>
             <UnstyledButton onClick={() => toggleColorScheme()}>
               Toggle Colour Scheme
             </UnstyledButton>
             <Anchor href="/search">Browse</Anchor>
             <Anchor href="/cart">
-              Cart {cart.length ? <>({cart.length})</> : null}
+              <Indicator
+                inline
+                label={cart.length}
+                disabled={!cart.length}
+                color="grape"
+                size={16}
+              >
+                Cart
+              </Indicator>
             </Anchor>
           </Flex>
         </Header>

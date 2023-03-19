@@ -1,4 +1,4 @@
-import { Code, SimpleGrid, Text } from "@mantine/core";
+import { Badge, Code, SimpleGrid, Text } from "@mantine/core";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import ProductCard from "product/lib/components/ProductCard";
 import { DummyProduct } from "../lib/types/product";
@@ -16,9 +16,9 @@ const Home = () => {
 
   return (
     <div>
-      <Text>
-        Home from <Code>home/index</Code>
-      </Text>
+      <Badge color="cyan" my="sm">
+        Home app
+      </Badge>
       <SimpleGrid
         cols={4}
         breakpoints={[

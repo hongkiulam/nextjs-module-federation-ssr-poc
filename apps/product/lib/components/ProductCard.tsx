@@ -11,9 +11,9 @@ const ProductCard: React.FC<{ product: DummyProduct }> = ({ product }) => {
       <Card.Section>
         <Image src={product.thumbnail} height={160} alt={product.title} />
       </Card.Section>
-      <Text my={"sm"}>
-        ProductCard from <Code>product/lib/components/ProductCard</Code>
-      </Text>
+      <Badge my={"sm"} color="grape">
+        Product app (ProductCard)
+      </Badge>
 
       <Group position="apart" mt="md" mb="xs">
         <Text weight={500}>{product.title}</Text>
@@ -28,7 +28,7 @@ const ProductCard: React.FC<{ product: DummyProduct }> = ({ product }) => {
 
       <Button
         variant="light"
-        color={isInCart ? "red" : "blue"}
+        color={isInCart ? "red" : "grape"}
         fullWidth
         mt="md"
         radius="md"
