@@ -33,5 +33,3 @@ yarn-error.log*
 # vercel
 .vercel
 
-pages/_document.tsx
-pages/_app.tsx

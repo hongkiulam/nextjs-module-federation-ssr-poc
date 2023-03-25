@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Button, Card, Code, Group, Image, Text } from "@mantine/core";
+import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
 import { DummyProduct } from "../types/product";
 import { useCart } from "../state/cart";
 

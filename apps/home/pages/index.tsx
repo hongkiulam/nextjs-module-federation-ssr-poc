@@ -1,18 +1,10 @@
-import { Badge, Code, SimpleGrid, Text } from "@mantine/core";
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import { Badge, SimpleGrid } from "@mantine/core";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import ProductCard from "product/lib/components/ProductCard";
-import { DummyProduct } from "../lib/types/product";
-
-const getProducts = (): Promise<DummyProduct[]> =>
-  fetch("https://dummyjson.com/products")
-    .then((res) => res.json())
-    .then((data) => data.products);
+import { useProducts, prefetchProducts } from "product/lib/data/product";
 
 const Home = () => {
-  const { data: products } = useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
-  });
+  const { products } = useProducts();
 
   return (
     <div>
@@ -27,7 +19,7 @@ const Home = () => {
           { cols: 1, maxWidth: "xs" },
         ]}
       >
-        {products?.map((product) => (
+        {products.slice(0, 10)?.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
       </SimpleGrid>
@@ -39,7 +31,7 @@ export default Home;
 
 export const getServerSideProps = async (ctx) => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(["products"], getProducts);
+  await prefetchProducts(queryClient);
 
   return {
     props: {

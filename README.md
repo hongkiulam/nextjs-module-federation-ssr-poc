@@ -2,7 +2,6 @@
 
 - react-query
   - product rows
-- colour code remotes (background or outline)
 - share types ( dummyproduct)
 - deploy assets and shell app
 - delegate modules

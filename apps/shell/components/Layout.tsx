@@ -1,5 +1,4 @@
 import {
-  Anchor,
   AppShell,
   Badge,
   Flex,
@@ -9,6 +8,7 @@ import {
   UnstyledButton,
   useMantineColorScheme,
 } from "@mantine/core";
+import Link from "next/link";
 import { useCart } from "product/lib/state/cart";
 const Layout = ({ children }) => {
   const { toggleColorScheme } = useMantineColorScheme();
@@ -19,13 +19,15 @@ const Layout = ({ children }) => {
         <Header height={60}>
           <Flex align={"center"} h="100%" px={"24px"} justify="space-between">
             <Text>
-              Header from <Badge color="dark">shell/_app</Badge>
+              <Link href="/">
+                Header from <Badge color="dark">shell/_app</Badge>
+              </Link>
             </Text>
             <UnstyledButton onClick={() => toggleColorScheme()}>
               Toggle Colour Scheme
             </UnstyledButton>
-            <Anchor href="/search">Browse</Anchor>
-            <Anchor href="/cart">
+            <Link href="/search">Browse</Link>
+            <Link href="/cart">
               <Indicator
                 inline
                 label={cart.length}
@@ -35,7 +37,7 @@ const Layout = ({ children }) => {
               >
                 Cart
               </Indicator>
-            </Anchor>
+            </Link>
           </Flex>
         </Header>
       }

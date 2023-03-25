@@ -17,8 +17,10 @@ module.exports = {
         },
         exposes: {
           "./pages/index": "./pages/index",
+          "./pages/cart": "./pages/cart",
           "./lib/components/ProductCard": "./lib/components/ProductCard",
           "./lib/state/cart": "./lib/state/cart",
+          "./lib/data/product": "./lib/data/product",
         },
         shared: {
           "@mantine/core": { singleton: true },
