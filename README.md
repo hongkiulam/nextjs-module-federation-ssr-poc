@@ -164,3 +164,16 @@ I've tested Emotion to work perfectly fine with zero configuration using @emotio
 ## Shared library with share key `scope/`
 
 Very useful to share all packages under the scope, e.g. `'@tanstack/'` shares `'@tanstack/query-core'` and `'@tanstack/react-query'`. Just have to be careful as sometimes you don't want to share a nested package.
+
+## Broken state (zustand) when consuming a state hook which was exposed by self
+
+e.g.
+Home consumes the state hook exposed by product
+`product -> useCart -> home/pages/index`
+
+Product reconsumes home page, which uses exposed state hook
+`product <- home/pages/index <- useCart <- product`
+
+This scenario seems to create two separate zustand stores which aren't connected.
+
+Probably because one comes from the `product` source code, whereas the other one comes from `product/remoteEntry.js`.
