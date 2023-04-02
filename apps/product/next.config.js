@@ -28,7 +28,7 @@ module.exports = {
         shared: {
           "@mantine/core": { singleton: true },
           "@tanstack/": { singleton: true },
-          zustand: { singleton: true },
+          jotai: { singleton: true },
         },
         extraOptions: { automaticAsyncBoundary: true },
       })

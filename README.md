@@ -177,3 +177,6 @@ Product reconsumes home page, which uses exposed state hook
 This scenario seems to create two separate zustand stores which aren't connected.
 
 Probably because one comes from the `product` source code, whereas the other one comes from `product/remoteEntry.js`.
+
+### Fix
+While the above is somewhat of an edge case, one working fix is to attach the state reference to `window`, so that even if `useCart` is called multiple times they can still share as a single state.

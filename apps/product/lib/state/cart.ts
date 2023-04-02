@@ -1,31 +1,28 @@
-import { create } from "zustand";
+import { atom, useAtom } from "jotai";
 
-interface CartActions {
-  addToCart: (productId: number) => void;
-  removeFromCart: (productId: number) => void;
+const isServer = typeof window === "undefined";
+const cartAtom = atom<number[]>([]);
+
+// ensure that we keep only one reference of this state across apps
+if (!isServer && !window.__cartAtom__) {
+  window.__cartAtom__ = cartAtom;
 }
 
-interface CartState {
-  cart: number[];
-}
-
-export const useCart = create<CartActions & CartState>((set, get) => {
+export const useCart = () => {
+  const [cart, setCart] = useAtom(!isServer ? window.__cartAtom__ : cartAtom);
   return {
-    cart: [],
-    addToCart(productId) {
-      if (get().cart.includes(productId)) {
-        return;
-      }
-      set((state) => ({ ...state, cart: [...state.cart, productId] }));
+    cart,
+    addToCart: (productId: number) => {
+      setCart((prev) => [...prev, productId]);
     },
-    removeFromCart(productId) {
-      if (!get().cart.includes(productId)) {
-        return;
-      }
-      set((state) => ({
-        ...state,
-        cart: state.cart.filter((id) => id !== productId),
-      }));
+    removeFromCart: (productId: number) => {
+      setCart((prev) => prev.filter((id) => id !== productId));
     },
   };
-});
+};
+
+declare global {
+  interface Window {
+    __cartAtom__: typeof cartAtom;
+  }
+}
