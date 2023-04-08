@@ -12,7 +12,6 @@ module.exports = {
         filename: "static/chunks/remoteEntry.js",
         exposes: {
           "./_app": "./pages/_app",
-          "./components/Container": "./components/Container",
         },
         remotes: {
           home: `home@${process.env.HOME_URL}/_next/static/${
