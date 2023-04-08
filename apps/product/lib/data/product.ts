@@ -8,7 +8,7 @@ const getProducts = (): Promise<DummyProduct[]> =>
 
 const cacheKey = "products";
 export const useProducts = () => {
-  const { data: products } = useQuery({
+  const { data: products = [] } = useQuery({
     queryKey: [cacheKey],
     queryFn: getProducts,
   });
