@@ -12,12 +12,13 @@ module.exports = {
         filename: "static/chunks/remoteEntry.js",
         exposes: {
           "./_app": "./pages/_app",
+          "./components/Container": "./components/Container",
         },
         remotes: {
-          home: `home@http://localhost:3001/_next/static/${
+          home: `home@${process.env.HOME_URL}/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
-          product: `product@http://localhost:3002/_next/static/${
+          product: `product@${process.env.PRODUCT_URL}/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
         },

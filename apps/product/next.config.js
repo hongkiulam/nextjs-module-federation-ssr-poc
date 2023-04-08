@@ -11,10 +11,10 @@ module.exports = {
         name: "product",
         filename: "static/chunks/remoteEntry.js",
         remotes: {
-          shell: `shell@http://localhost:3000/_next/static/${
+          shell: `shell@${process.env.SHELL_URL}/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
-          home: `home@http://localhost:3001/_next/static/${
+          home: `home@${process.env.HOME_URL}/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
         },
